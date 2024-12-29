@@ -1,0 +1,35 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block content %}
+
+<div style="margin-top: 120px;"></div>
+
+<h1 class="text-center display-3" id="em">EMERGENCY ALERT</h1>
+<audio id="alertSound">
+    <source src="{%static 'assets\imgs\alert.wav' %}" type="audio/mpeg">
+    <source src="{%static 'assets\imgs\alert.wav' %}" type="audio/ogg">
+    Your browser does not support the audio element.
+</audio>
+
+<style>
+    @keyframes blink {
+        0% { opacity: 1; }
+        50% { opacity: 0; }
+        100% { opacity: 1; }
+    }
+
+    #em {
+        color: red;
+        animation: blink 1s infinite;
+    }
+</style>
+
+<script>
+    window.onload = function() {
+            const sound = document.getElementById('alertSound');
+            sound.play().catch(error => {
+                console.error('Audio playback failed:', error);
+            });
+        };
+</script>
+{% endblock %}

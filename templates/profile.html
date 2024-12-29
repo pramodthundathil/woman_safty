@@ -1,0 +1,65 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block content %}
+<div style="margin-top: 150px;"></div>
+<div class="container mt-5">
+    <h1 class="text-center">Profile</h1>
+    {% for message in messages %}
+    <div class="alert {{message.tags}} alert-dismissible fade show" role="alert">
+      <strong>Hai!</strong> {{message}} {{form3.errors}} {{form2.errors}}
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% endfor %}
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body text-center">
+                    {% if request.user.client_user.profile_pic %}
+                    <img src="{{request.user.client_user.profile_pic.url}}" class="rounded-circle img-fluid" alt="Profile Photo" width="150">
+                    {% else %}
+                    <img src="{%static 'assets\imgs\woman.png' %}" class="rounded-circle img-fluid" alt="Profile Photo" width="150">
+                    {% endif %}
+                    <h3 class="mt-3">{{request.user}}</h3>
+                    <form method="post">
+                        {% for i in form1 %}
+                        <div class="form-group">
+                            <label for="emergency_contact_1">{{i.label}}</label>
+                            {{i}}
+                        </div>
+                        {% endfor %}
+                        
+                        
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-body">
+                    <h4>Contact Details</h4>
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {% for i in form2 %}
+                        <div class="form-group">
+                            <label for="emergency_contact_1">{{i.label}}</label>
+                            {{i}}
+                        </div>
+                        {% endfor %}
+                        <h4 class="mt-4">Emergency Contacts</h4>
+                        {% for i in form3 %}
+                        <div class="form-group">
+                            <label for="emergency_contact_1">{{i.label}}</label>
+                            {{i}}
+                        </div>
+                        {% endfor %}
+                       
+                        <button type="submit" class="btn btn-primary mt-3">Update</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

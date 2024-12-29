@@ -1,0 +1,50 @@
+{% extends 'admin/index.html' %}
+{% block admin %}
+
+<style>
+    input[type="text"],
+    [type="email"],
+    [type="password"] {
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        box-sizing: border-box;
+    }
+    .content{
+        /* max-width: 1200px; */
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+        margin: auto;
+        padding: 20px;
+    }
+</style>
+
+<div class="container mt-5 mb-5">
+
+    <div class="content">
+
+        <h4>Update User {{client.first_name}}</h4>
+        <div class="container">
+            <form method="post">
+                {% csrf_token %}
+
+                <div class="row">
+                    <div class="col-md-6">
+                {{ form1.as_p }}
+
+                    </div>
+                    <div class="col-md-6">
+                {{ form2.as_p }}
+
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Update</button>
+            </form>
+
+        </div>
+    </div>
+    <br><br>
+</div>
+{% endblock %}

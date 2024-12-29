@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+ 
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <style>
+        main {
+            display: flex;
+        }
+
+        .sidebar {
+            width: 250px;
+            height: 100vh;
+            background-color: #343a40;
+            padding-top: 20px;
+        }
+
+        .sidebar a {
+            padding: 15px;
+            text-decoration: none;
+            font-size: 18px;
+            color: white;
+            display: block;
+        }
+
+        .sidebar a:hover {
+            background-color: #575d63;
+        }
+
+        .content {
+            flex: 1;
+            padding: 20px;
+        }
+
+        .card {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light " style="background-color: #e3f2fd;box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;">
+        <a class="navbar-brand" href="#">Team Panel - Woman Safety</a>
+        <div class="collapse navbar-collapse justify-content-end">
+            <ul class="navbar-nav">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        {{request.user}}
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="{%url 'SignOut' %}">Logout</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <main>
+        <div class="sidebar">
+            <a href="{%url 'staff_index' %}">Home</a>
+            <a href="{%url 'complaints_staff' %}">Compliances</a>
+        
+        </div>
+        {% block admin %}
+        <div class="content">
+            <div class="container">
+                <div class="row">
+                    
+                    
+                    <div class="col-md-4">
+                        <div class="card text-white bg-danger">
+                            <div class="card-body">
+                                <h5 class="card-title">Complaint</h5>
+                                <p class="card-text">Manage collection requests.</p>
+                                <!-- <a href="" class="btn btn-light">Go to Collection Requests</a> -->
+                                <a href="{%url 'complaints_staff' %}" class="btn btn-light">Go to Collection Requests</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="col-md-4">
+                        <div class="card text-white bg-warning">
+                            <div class="card-body">
+                                <h5 class="card-title">Garbage Vault</h5>
+                                <p class="card-text">Manage garbage vault.</p>
+                                <a href="#garbage-vault" class="btn btn-light">Go to Garbage Vault</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card text-white bg-info">
+                            <div class="card-body">
+                                <h5 class="card-title">Disposal</h5>
+                                <p class="card-text">Manage disposal.</p>
+                                <a href="#disposal" class="btn btn-light">Go to Disposal</a>
+                            </div>
+                        </div>
+                    </div>-->
+                    <div class="col-md-4">
+                        <div class="card text-red bg-dark">
+                            <div class="card-body">
+                                <h5 class="card-title">SOS MESSAGES</h5>
+                                {% for a in alert %}
+                                <div class="card bg-light mb-3 text-center">
+                                    <h4 id="em" class="text-danger">Alert from {{a.user.first_name}}</h4>
+                                    <div style="width:30%;margin: auto;">
+                                        <a href="{%url 'view_details_staff' a.id %}" class="btn  btn-info">View</a>
+                                        <a href="{%url 'diapose_alart_staff' a.id%}" class="btn btn-warning">Dispose</a>
+                                    </div>
+
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div> 
+                </div>
+            </div>
+        </div>
+        {% endblock %}
+    </main>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>

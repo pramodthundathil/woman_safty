@@ -1,0 +1,92 @@
+{% extends 'staff/index.html' %}
+{% block admin %}
+
+<div class="container mt-4">
+    <h1 class="mb-4">Complaint Details</h1>
+    <!-- Button to Open the Modal -->
+    
+    {% for message in messages %}
+    <div class="alert {{message.tags}} alert-dismissible fade show" role="alert">
+        <strong>Hai!</strong> {{message}}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  
+    {% endfor %}
+
+    <div class="card mb-4">
+        <div class="card-header">
+            <h2>Complaint ID: {{ complaint.complaint_id }}</h2>
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">Type: {{ complaint.complaint_type }}</h5>
+            <p class="card-text"><strong>Description:</strong> {{ complaint.description }}</p>
+            <p class="card-text"><strong>Date Reported:</strong> {{ complaint.date_reported }}</p>
+            <p class="card-text"><strong>Status:</strong> {{ complaint.status }}</p>
+            <p class="card-text"><strong>Judgment Status:</strong> {{ complaint.judgment_status }}</p>
+            {% if complaint.document %}
+                <p class="card-text"><strong>Document:</strong> <a href="{{ complaint.document.url }}">View Document</a></p>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Button to Open the Modal -->
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addStatusModal">
+        Add Status
+    </button>
+
+    <!-- The Modal -->
+    <div class="modal fade" id="addStatusModal" tabindex="-1" aria-labelledby="addStatusModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addStatusModalLabel">Add Status</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            {{form.as_p}}
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Status Table -->
+    <div class="mt-4">
+        <h3>Status History</h3>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col">Date</th>
+                    <th>Description</th>
+                    <th scope="col">Status</th>
+                    <th>Document</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for status in complaint.complaint_status.all %}
+                    <tr>
+                        <td>{{ status.date_updated }}</td>
+                        <td>{{status.description}}</td>
+                        <td>{{ status.get_status_display }}</td>
+                        <th>
+                            {% if status.document %}
+
+                            <a href="{{status.document.url}}">Download</a>
+                            {% endif %}
+                        </th>
+
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+
+</div>
+
+{% endblock %}

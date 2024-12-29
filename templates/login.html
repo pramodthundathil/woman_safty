@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Start your development with Steller landing page.">
+    <meta name="author" content="Devcrud">
+    <title>Woman Safety</title>
+    <!-- font icons -->
+    <link rel="stylesheet" href="{%static 'assets/vendors/themify-icons/css/themify-icons.css' %}">
+    <!-- Bootstrap + Steller main styles -->
+	<link rel="stylesheet" href="{%static 'assets/css/steller.css' %}">
+</head>
+<body data-spy="scroll" data-target=".navbar" data-offset="40" id="home">
+
+    <!-- Page navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" data-spy="affix" data-offset-top="0">
+        <div class="container">
+            <a class="navbar-brand" href="#"><img src="{%static 'assets/imgs/logo.svg' %}" alt="">Woman Safety</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto align-items-center">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{%url 'SignUp' %}">Register</a>
+                    </li>
+                   
+                    <li class="nav-item">
+                      <a class="- btn btn-primary rounded ml-4" href="">EMERGENCY</a>
+
+                    </li>
+                </ul>
+            </div>
+        </div>          
+    </nav>
+    <!-- End of page navibation -->
+
+      <section id="home">
+        
+            <div style="margin-top:100px"></div>
+            <div class="container">
+                <div class="row flex-center" >
+                    <div class="col-md-12 col-lg-12 text-center text-md-start " data-aos="fade-up" style="padding: 20px;border: .5px solid gary;background-color: aliceblue;opacity: .8; border-radius: 10px;z-index: 1;">
+                        <h3 class="text-center">Login</h3>
+                        {% for message in messages %}
+                        <div class="alert {{message.tags}} alert-dismissible fade show" role="alert">
+                          <strong>Hai!</strong> {{message}}
+                          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                        {% endfor %}
+                        <form class="row g-3 align-items-center" method="post">
+                          {% csrf_token %}
+                          <div class="mb-3 col-6">
+                            <label class="form-label" for="formGroupExampleInput">Enter your Username</label>
+                            <input type="text" name="uname" class="form-control form-traffico-control" id="formGroupExampleInput" placeholder="Enter your Username">
+                          </div>
+                          <div class="mb-3 col-6">
+                            <label class="form-label" for="formGroupExampleInput2">Enter your password</label>
+                            <input type="password" name="pswd" class="form-control form-traffico-control" id="formGroupExampleInput2" placeholder="Enter your password">
+                          </div>
+                          <div class="col-12">
+                            <button class="btn btn-primary" type="submit">Login
+                              <svg class="bi bi-arrow-right ms-2" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"></path>
+                              </svg>
+                            </button>
+                          </div>
+                        </form>
+                        <!-- <form method="post" >
+                          {% csrf_token %}
+                            <input type="text" name="uname" class="form-control" placeholder="Enter your Username"><br>
+                            <input type="password" name="pswd" class="form-control" placeholder="Enter your password"><br><br>
+                            <button type="submit" class="btn btn-outline-primary">Login</button>
+                        </form> -->
+                        Dont Have account click<a href="{%url 'SignUp'%}"> Here</a>
+                    </div>
+                    <div class="col-md-6" style="height: 200px;"></div>
+            </div>
+
+     
+      </section>
+
+
+      <!-- Page Footer -->
+    <footer class="page-footer">
+      <div class="container">
+          <div class="row align-items-center">
+              <div class="col-sm-6">
+                  <p>Copyright <script>document.write(new Date().getFullYear())</script> &copy; <a href="" target="_blank">MES</a></p>
+              </div>
+              <div class="col-sm-6">
+                  <div class="socials">
+                      <a class="social-item" href="javascript:void(0)"><i class="ti-facebook"></i></a>
+                      <a class="social-item" href="javascript:void(0)"><i class="ti-google"></i></a>
+                      <a class="social-item" href="javascript:void(0)"><i class="ti-github"></i></a>
+                      <a class="social-item" href="javascript:void(0)"><i class="ti-twitter"></i></a>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </footer> 
+  <!-- End of page footer -->
+
+<!-- core  -->
+  <script src="{%static 'assets/vendors/jquery/jquery-3.4.1.js' %}"></script>
+  <script src="{%static 'assets/vendors/bootstrap/bootstrap.bundle.js' %}"></script>
+  <!-- bootstrap 3 affix -->
+<script src="{%static 'assets/vendors/bootstrap/bootstrap.affix.js' %}"></script>
+
+  <!-- steller js -->
+  <script src="{%static 'assets/js/steller.js' %}"></script>
+
+</body>
+</html>

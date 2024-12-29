@@ -1,0 +1,45 @@
+{% extends 'admin/index.html' %}
+{% block admin %}
+
+<div class="container mt-4">
+    <h1 class="mb-4">Complaint Details</h1>
+    <!-- Button to Open the Modal -->
+    
+    {% for message in messages %}
+    <div class="alert {{message.tags}} alert-dismissible fade show" role="alert">
+        <strong>Hai!</strong> {{message}}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  
+    {% endfor %}
+
+    <div class="mt-4">
+        <h2>Client Details</h2>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">{{ client.name }}</h5>
+                <p class="card-text"><strong>Phone:</strong> {{ client.phone }}</p>
+                <p class="card-text"><strong>Address:</strong> {{ client.address }}</p>
+                <p class="card-text"><strong>Location:</strong> {{ client.location }}</p>
+                <p class="card-text"><strong>Date Added:</strong> {{ client.date_added }}</p>
+                <p class="card-text"><strong>Profile Picture:</strong> <img src="{{ client.profile_pic.url }}" alt="Profile Picture" width="100" height="100"></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-4">
+        <h2>Emergency Contacts</h2>
+        {% for contact in client.user.emergency_contacts.all %}
+        <div class="card mb-2">
+            <div class="card-body">
+                <h5 class="card-title">{{ contact.name }} ({{ contact.relationship }})</h5>
+                <p class="card-text"><strong>Email:</strong> {{ contact.email }}</p>
+                <p class="card-text"><strong>Phone:</strong> {{ contact.phone }}</p>
+                <p class="card-text"><strong>Address:</strong> {{ contact.address }}</p>
+                <p class="card-text"><strong>Date Added:</strong> {{ contact.date_added }}</p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
